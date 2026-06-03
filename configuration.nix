@@ -10,7 +10,7 @@
   users.users.ashtonaut = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    initialPassword = "changeme";
+    hashedPasswordFile = "/etc/secrets/ashtonaut.hash";
   };
 
   i18n.defaultLocale = "en_GB.UTF-8";
