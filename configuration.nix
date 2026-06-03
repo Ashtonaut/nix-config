@@ -19,7 +19,35 @@
 
   networking = {
     hostName = "ashtonaut-laptop";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      ensureProfiles = {
+        environmentFiles = [ "/etc/secrets/eduroam.env" ];
+        profiles.eduroam = {
+          connection = {
+            id = "eduroam";
+            type = "wifi";
+            autoconnect = true;
+          };
+          wifi = {
+            mode = "infrastructure";
+            ssid = "eduroam";
+          };
+          wifi-security = {
+            key-mgmt = "wpa-eap";
+          };
+          "802-1x" = {
+            eap = "peap";
+            phase2-auth = "mschapv2";
+            anonymous-identity = "anonymous@leeds.ac.uk";
+            identity = "$EDUROAM_IDENTITY";
+            password = "$EDUROAM_PASSWORD";
+          };
+          ipv4.method = "auto";
+          ipv6.method = "auto";
+        };
+      };
+    };
   };
 
   boot.loader = {
