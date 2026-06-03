@@ -4,8 +4,11 @@
 
   environment.systemPackages = with pkgs; [
     git
+    kitty
     vim
   ];
+
+  programs.hyprland.enable = true;
 
   users.users.ashtonaut = {
     isNormalUser = true;
