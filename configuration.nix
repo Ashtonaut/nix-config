@@ -10,6 +10,8 @@
 
   programs.hyprland.enable = true;
 
+  services.xserver.xkb.layout = "gb";
+
   users.users.ashtonaut = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -17,8 +19,8 @@
   };
 
   i18n.defaultLocale = "en_GB.UTF-8";
-  console.keyMap = "uk";
   time.timeZone = "Europe/London";
+  console.useXkbConfig = true;
 
   networking = {
     hostName = "ashtonaut-laptop";
@@ -59,4 +61,6 @@
   };
 
   system.stateVersion = "25.11";
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
