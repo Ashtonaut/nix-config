@@ -2,6 +2,8 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
+  nixpkgs.config.allowUnfree = true; # In place for legacy, remove when possible!
+
   environment.systemPackages = with pkgs; [
     git
     kitty
@@ -11,6 +13,19 @@
   programs.hyprland.enable = true;
 
   services.xserver.xkb.layout = "gb";
+
+  specialisation.legacy.configuration = {
+    system.nixos.tags = [ "legacy" ];
+    services = {
+      xserver.enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+    };
+    environment.systemPackages = with pkgs; [
+      vscode
+      google-chrome
+    ];
+  };
 
   users.users.ashtonaut = {
     isNormalUser = true;
