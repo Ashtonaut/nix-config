@@ -9,6 +9,8 @@
     hyprland = {
       enable = true;
       configType = "lua";
+      package = null;
+      portalPackage = null;
     };
   }; 
 
