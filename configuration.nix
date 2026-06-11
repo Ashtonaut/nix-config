@@ -4,11 +4,16 @@
 
   nixpkgs.config.allowUnfree = true; # In place for legacy, remove when possible!
 
-  environment.systemPackages = with pkgs; [
-    git
-    kitty
-    vim
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      git
+      vim
+    ];
+    pathsToLink = [
+      "/share/applications"
+      "/share/xdg-desktop-portal"
+    ];
+  };
 
   programs.hyprland.enable = true;
 
