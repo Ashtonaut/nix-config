@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ 
+    ./hardware-configuration.nix 
+    #./disko-config.nix
+  ];
 
   nixpkgs.config.allowUnfree = true; # In place for legacy, remove when possible!
 
