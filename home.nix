@@ -2,7 +2,11 @@
 
 {
   programs = {
-    git.enable = true;
+    git = {
+      enable = true;
+      userName = "Ashtonaut";
+      userEmail = "jzqq6560@leeds.ac.uk";
+    };
     kitty.enable = true;
     vim.enable = true;
   };
