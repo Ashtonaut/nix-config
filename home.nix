@@ -39,9 +39,9 @@
               _args = [ "${mod} + ${bindEntry.key}" (lib.generators.mkLuaInline bindEntry.dispatcher) ];
             };
             bindEntries = [
-              { key = "Q"; dispatcher = ''hl.dsp.exec_cmd("kitty")''; }
-              { key = "C"; dispatcher = ''hl.dsp.window.close()''; }
-              { key = "M"; dispatcher = ''hl.dsp.exit()''; }
+              { key = "Return"; dispatcher = ''hl.dsp.exec_cmd("kitty")''; }
+              { key = "Q"; dispatcher = ''hl.dsp.window.close()''; }
+              { key = "SHIFT + Q"; dispatcher = ''hl.dsp.exit()''; }
             ];
           in
           map mkBind bindEntries;
