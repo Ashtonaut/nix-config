@@ -11,6 +11,7 @@
         };
       };
     };
+
     kitty.enable = true;
     vim.enable = true;
   };
@@ -31,21 +32,23 @@
             scale = 1;
           }
         ];
+
         config = {
           input = {
             kb_layout = "gb";
           };
         };
+
         bind =
           let
             mod = "SUPER";
             mkBind = bindEntry: {
-              _args = [ "${mod} + ${bindEntry.key}" (lib.generators.mkLuaInline bindEntry.dispatcher) ];
+              _args = [ "${mod} + ${bindEntry.key}" (lib.generators.mkLuaInline bindEntry.dsp) ];
             };
             bindEntries = [
-              { key = "Return"; dispatcher = ''hl.dsp.exec_cmd("kitty")''; }
-              { key = "Q"; dispatcher = ''hl.dsp.window.close()''; }
-              { key = "SHIFT + Q"; dispatcher = ''hl.dsp.exit()''; }
+              { key = "Return";    dsp = ''hl.dsp.exec_cmd("kitty")''; }
+              { key = "Q";         dsp = ''hl.dsp.window.close()''; }
+              { key = "SHIFT + Q"; dsp = ''hl.dsp.exit()''; }
             ];
           in
           map mkBind bindEntries;
