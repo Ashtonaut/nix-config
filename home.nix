@@ -45,6 +45,12 @@
             mkBind = bindEntry: {
               _args = [ "${mod} + ${bindEntry.key}" (lib.generators.mkLuaInline bindEntry.dsp) ];
             };
+            
+            wsKeys = builtins.genList (i: i+1) 9;
+            wsBindEntries = 
+              (map (n: { key = toString n; dsp = ''hl.dsp.focus({ workspace = ${toString n} })''; }) wsKeys)
+              ++ (map (n: { key = "SHIFT + ${toString n}"; dsp = ''hl.dsp.window.move({ workspace = ${toString n}, follow = false })''; }) wsKeys);
+
             bindEntries = [
               # Launch applications
               { key = "Return"; dsp = ''hl.dsp.exec_cmd("kitty")''; }
@@ -66,7 +72,7 @@
               { key = "SHIFT + Down";  dsp = ''hl.dsp.window.move({ direction = "down" })''; }
             ];
           in
-          map mkBind bindEntries;
+          map mkBind (bindEntries ++ wsBindEntries);
       };
     };
   }; 
