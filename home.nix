@@ -32,18 +32,19 @@
             kb_layout = "gb";
           };
         };
-        bind = 
+        bind =
           let
             mod = "SUPER";
-            mkBind = key: dispatcher: {
-              _args = [ "${mod} + ${key}" (lib.generators.mkLuaInline dispatcher) ];
+            mkBind = bindEntry: {
+              _args = [ "${mod} + ${bindEntry.key}" (lib.generators.mkLuaInline bindEntry.dispatcher) ];
             };
+            bindEntries = [
+              { key = "Q"; dispatcher = ''hl.dsp.exec_cmd("kitty")''; }
+              { key = "C"; dispatcher = ''hl.dsp.window.close()''; }
+              { key = "M"; dispatcher = ''hl.dsp.exit()''; }
+            ];
           in
-          [
-            (mkBind "Q" ''hl.dsp.exec_cmd("kitty")'')
-            (mkBind "C" "hl.dsp.window.close()")
-            (mkBind "M" "hl.dsp.exit()")
-          ];
+          map mkBind bindEntries;
       };
     };
   }; 
