@@ -58,6 +58,12 @@
               { key = "Right"; dsp = ''hl.dsp.focus({ direction = "right" })''; }
               { key = "Up";    dsp = ''hl.dsp.focus({ direction = "up" })''; }
               { key = "Down";  dsp = ''hl.dsp.focus({ direction = "down" })''; }
+
+              # Move windows
+              { key = "SHIFT + Left";  dsp = ''hl.dsp.window.move({ direction = "left" })''; }
+              { key = "SHIFT + Right"; dsp = ''hl.dsp.window.move({ direction = "right" })''; }
+              { key = "SHIFT + Up";    dsp = ''hl.dsp.window.move({ direction = "up" })''; }
+              { key = "SHIFT + Down";  dsp = ''hl.dsp.window.move({ direction = "down" })''; }
             ];
           in
           map mkBind bindEntries;
