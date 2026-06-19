@@ -47,11 +47,17 @@
             };
             bindEntries = [
               # Launch applications
-              { key = "Return";    dsp = ''hl.dsp.exec_cmd("kitty")''; }
+              { key = "Return"; dsp = ''hl.dsp.exec_cmd("kitty")''; }
 
               # Window management
               { key = "Q";         dsp = ''hl.dsp.window.close()''; }
               { key = "SHIFT + Q"; dsp = ''hl.dsp.exit()''; }
+
+              # Move focus
+              { key = "Left";  dsp = ''hl.dsp.focus({ direction = "left" })''; }
+              { key = "Right"; dsp = ''hl.dsp.focus({ direction = "right" })''; }
+              { key = "Up";    dsp = ''hl.dsp.focus({ direction = "up" })''; }
+              { key = "Down";  dsp = ''hl.dsp.focus({ direction = "down" })''; }
             ];
           in
           map mkBind bindEntries;
