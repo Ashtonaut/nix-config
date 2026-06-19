@@ -4,8 +4,12 @@
   programs = {
     git = {
       enable = true;
-      userName = "Ashtonaut";
-      userEmail = "jzqq6560@leeds.ac.uk";
+      settings = {
+        user = {
+          name = "Ashtonaut";
+          email = "jzqq6560@leeds.ac.uk";
+        };
+      };
     };
     kitty.enable = true;
     vim.enable = true;
