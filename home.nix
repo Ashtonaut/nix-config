@@ -27,6 +27,11 @@
             scale = 1;
           }
         ];
+        config = {
+          input = {
+            kb_layout = "gb";
+          };
+        };
         bind = 
           let
             mod = "SUPER";
