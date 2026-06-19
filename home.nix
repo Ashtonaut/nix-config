@@ -46,7 +46,10 @@
               _args = [ "${mod} + ${bindEntry.key}" (lib.generators.mkLuaInline bindEntry.dsp) ];
             };
             bindEntries = [
+              # Launch applications
               { key = "Return";    dsp = ''hl.dsp.exec_cmd("kitty")''; }
+
+              # Window management
               { key = "Q";         dsp = ''hl.dsp.window.close()''; }
               { key = "SHIFT + Q"; dsp = ''hl.dsp.exit()''; }
             ];
