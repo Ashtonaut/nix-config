@@ -1,11 +1,13 @@
 { 
   config, 
   lib, 
-  pkgs, 
+  pkgs,
+  inputs, 
   ... 
 }:
 
 {
+  imports = [ inputs.zen-browser.homeModules.beta ];
   programs = {
     git = {
       enable = true;
@@ -19,6 +21,7 @@
 
     kitty.enable = true;
     vim.enable = true;
+    zen-browser.enable = true;
   };
 
   wayland.windowManager = {
