@@ -13,15 +13,22 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, disko, ... }: {
+  outputs = { 
+    nixpkgs, 
+    home-manager, 
+    disko, 
+    ... 
+  }: {
     nixosConfigurations.ashtonaut-laptop = nixpkgs.lib.nixosSystem {
       modules = [ 
         ./configuration.nix
         home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.ashtonaut = ./home.nix;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.ashtonaut = ./home.nix;
+          };
         }
         disko.nixosModules.disko
       ];
