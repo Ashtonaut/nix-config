@@ -1,6 +1,0 @@
-TODO:
-
-Fix following imperative state:
-  Wi-Fi (and secrets)?
-  GitHub stuff too!
-  Config symlink (flakes?)
