@@ -22,6 +22,10 @@
     zen-browser = {
       enable = true;
       setAsDefaultBrowser = true;
+
+      policies = {
+        DontCheckDefaultBrowser = true;
+      };
     };
 
     kitty.enable = true;
