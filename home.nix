@@ -19,9 +19,13 @@
       };
     };
 
+    zen-browser = {
+      enable = true;
+      setAsDefaultBrowser = true;
+    };
+
     kitty.enable = true;
     vim.enable = true;
-    zen-browser.enable = true;
   };
 
   wayland.windowManager = {
