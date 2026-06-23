@@ -32,6 +32,15 @@
     vim.enable = true;
   };
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    gtk4.theme = null;
+  };
+
   wayland.windowManager = {
     hyprland = {
       enable = true;
