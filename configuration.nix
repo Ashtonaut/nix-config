@@ -20,7 +20,10 @@
 
   programs.hyprland.enable = true;
 
-  services.xserver.xkb.layout = "gb";
+  services = {
+    xserver.xkb.layout = "gb";
+    upower.enable = true;
+  };
 
   specialisation.legacy.configuration = {
     system.nixos.tags = [ "legacy" ];
