@@ -1,3 +1,4 @@
 *.env
 *.hash
 result
+CLAUDE.md

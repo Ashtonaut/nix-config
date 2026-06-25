@@ -8,6 +8,11 @@
 
 {
   imports = [ inputs.zen-browser.homeModules.beta ];
+
+  home.packages = [
+    pkgs.claude-code
+  ];
+
   programs = {
     git = {
       enable = true;
