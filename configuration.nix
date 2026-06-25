@@ -86,6 +86,13 @@
     efi.canTouchEfiVariables = true;
   };
 
+  swapDevices = [
+    { 
+      device = "/swapfile";
+      size = 16 * 1024;
+    }
+  ];
+
   system.stateVersion = "25.11";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
