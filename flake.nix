@@ -16,15 +16,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { 
     nixpkgs, 
     home-manager, 
-    disko, 
+    disko,
+    agenix, 
     ... 
   }@inputs: {
     nixosConfigurations.ashtonaut-laptop = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
       modules = [ 
         ./configuration.nix
         home-manager.nixosModules.home-manager
@@ -37,6 +43,7 @@
           };
         }
         disko.nixosModules.disko
+        agenix.nixosModules.default
       ];
     };
   };

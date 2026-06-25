@@ -1,4 +1,10 @@
-{ config, pkgs, ... }:
+{ 
+  config, 
+  pkgs,
+  inputs, 
+  ... 
+}:
+
 {
   imports = [ 
     ./hardware-configuration.nix 
@@ -9,6 +15,7 @@
 
   environment = {
     systemPackages = with pkgs; [
+      inputs.agenix.packages.x86_64-linux.default
       git
       vim
     ];
@@ -41,7 +48,15 @@
   users.users.ashtonaut = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = "/etc/secrets/ashtonaut.hash";
+    hashedPasswordFile = config.age.secrets."ashtonaut.hash".path;
+  };
+
+  age = {
+    secrets = {
+      "ashtonaut.hash".file = ./secrets/ashtonaut.hash.age;
+      "eduroam.env".file = ./secrets/eduroam.env.age;
+    };
+    identityPaths = [ "/etc/agenix/key.txt" ];
   };
 
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -53,7 +68,7 @@
     networkmanager = {
       enable = true;
       ensureProfiles = {
-        environmentFiles = [ "/etc/secrets/eduroam.env" ];
+        environmentFiles = [ config.age.secrets."eduroam.env".path ];
         profiles.eduroam = {
           connection = {
             id = "eduroam";
