@@ -15,7 +15,7 @@
 
   environment = {
     systemPackages = with pkgs; [
-      inputs.agenix.packages.x86_64-linux.default
+      inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
       git
       vim
     ];
