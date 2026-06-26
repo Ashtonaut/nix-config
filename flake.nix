@@ -22,29 +22,31 @@
     };
   };
 
-  outputs = { 
-    nixpkgs, 
-    home-manager, 
-    disko,
-    agenix, 
-    ... 
-  }@inputs: {
-    nixosConfigurations.ashtonaut-laptop = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [ 
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = { inherit inputs; };
-            users.ashtonaut = ./home.nix;
-          };
-        }
-        disko.nixosModules.disko
-        agenix.nixosModules.default
-      ];
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      disko,
+      agenix,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.ashtonaut-laptop = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.ashtonaut = ./home.nix;
+            };
+          }
+          disko.nixosModules.disko
+          agenix.nixosModules.default
+        ];
+      };
     };
-  };
 }

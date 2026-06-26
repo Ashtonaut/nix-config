@@ -1,8 +1,8 @@
-{  
-  lib, 
+{
+  lib,
   pkgs,
-  inputs, 
-  ... 
+  inputs,
+  ...
 }:
 
 {
@@ -78,39 +78,81 @@
           let
             mod = "SUPER";
             mkBind = bindEntry: {
-              _args = [ "${mod} + ${bindEntry.key}" (lib.generators.mkLuaInline bindEntry.dsp) ];
+              _args = [
+                "${mod} + ${bindEntry.key}"
+                (lib.generators.mkLuaInline bindEntry.dsp)
+              ];
             };
-            
-            wsKeys = builtins.genList (i: i+1) 9;
-            wsBindEntries = 
-              (map (n: { key = toString n; dsp = ''hl.dsp.focus({ workspace = ${toString n} })''; }) wsKeys)
-              ++ (map (n: { key = "SHIFT + ${toString n}"; dsp = ''hl.dsp.window.move({ workspace = ${toString n}, follow = false })''; }) wsKeys);
+
+            wsKeys = builtins.genList (i: i + 1) 9;
+            wsBindEntries =
+              (map (n: {
+                key = toString n;
+                dsp = "hl.dsp.focus({ workspace = ${toString n} })";
+              }) wsKeys)
+              ++ (map (n: {
+                key = "SHIFT + ${toString n}";
+                dsp = "hl.dsp.window.move({ workspace = ${toString n}, follow = false })";
+              }) wsKeys);
 
             bindEntries = [
               # Launch applications
-              { key = "Return"; dsp = ''hl.dsp.exec_cmd("kitty")''; }
+              {
+                key = "Return";
+                dsp = ''hl.dsp.exec_cmd("kitty")'';
+              }
 
               # Window management
-              { key = "Q";         dsp = ''hl.dsp.window.close()''; }
-              { key = "SHIFT + Q"; dsp = ''hl.dsp.exit()''; }
+              {
+                key = "Q";
+                dsp = "hl.dsp.window.close()";
+              }
+              {
+                key = "SHIFT + Q";
+                dsp = "hl.dsp.exit()";
+              }
 
               # Move focus
-              { key = "Left";  dsp = ''hl.dsp.focus({ direction = "left" })''; }
-              { key = "Right"; dsp = ''hl.dsp.focus({ direction = "right" })''; }
-              { key = "Up";    dsp = ''hl.dsp.focus({ direction = "up" })''; }
-              { key = "Down";  dsp = ''hl.dsp.focus({ direction = "down" })''; }
+              {
+                key = "Left";
+                dsp = ''hl.dsp.focus({ direction = "left" })'';
+              }
+              {
+                key = "Right";
+                dsp = ''hl.dsp.focus({ direction = "right" })'';
+              }
+              {
+                key = "Up";
+                dsp = ''hl.dsp.focus({ direction = "up" })'';
+              }
+              {
+                key = "Down";
+                dsp = ''hl.dsp.focus({ direction = "down" })'';
+              }
 
               # Move windows
-              { key = "SHIFT + Left";  dsp = ''hl.dsp.window.move({ direction = "left" })''; }
-              { key = "SHIFT + Right"; dsp = ''hl.dsp.window.move({ direction = "right" })''; }
-              { key = "SHIFT + Up";    dsp = ''hl.dsp.window.move({ direction = "up" })''; }
-              { key = "SHIFT + Down";  dsp = ''hl.dsp.window.move({ direction = "down" })''; }
+              {
+                key = "SHIFT + Left";
+                dsp = ''hl.dsp.window.move({ direction = "left" })'';
+              }
+              {
+                key = "SHIFT + Right";
+                dsp = ''hl.dsp.window.move({ direction = "right" })'';
+              }
+              {
+                key = "SHIFT + Up";
+                dsp = ''hl.dsp.window.move({ direction = "up" })'';
+              }
+              {
+                key = "SHIFT + Down";
+                dsp = ''hl.dsp.window.move({ direction = "down" })'';
+              }
             ];
           in
           map mkBind (bindEntries ++ wsBindEntries);
       };
     };
-  }; 
+  };
 
   home.stateVersion = "25.11";
 }

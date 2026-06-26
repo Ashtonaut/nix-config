@@ -1,19 +1,18 @@
-{ 
-  config, 
+{
+  config,
   lib,
   pkgs,
-  inputs, 
-  ... 
+  inputs,
+  ...
 }:
 
 {
-  imports = [ 
-    ./hardware-configuration.nix 
+  imports = [
+    ./hardware-configuration.nix
     ./disko-config.nix
   ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "claude-code" ];
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "claude-code" ];
 
   environment = {
     systemPackages = with pkgs; [
@@ -91,7 +90,7 @@
   };
 
   swapDevices = [
-    { 
+    {
       device = "/swapfile";
       size = 16 * 1024;
     }
@@ -101,7 +100,10 @@
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
     };
     gc = {
