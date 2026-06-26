@@ -32,6 +32,7 @@
     xserver.xkb.layout = "gb";
     upower.enable = true;
     tlp.enable = true;
+    thermald.enable = true;
   };
 
   users.users.ashtonaut = {
