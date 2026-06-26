@@ -31,6 +31,7 @@
   services = {
     xserver.xkb.layout = "gb";
     upower.enable = true;
+    tlp.enable = true;
   };
 
   users.users.ashtonaut = {
@@ -85,7 +86,10 @@
   };
 
   boot.loader = {
-    systemd-boot.enable = true;
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 10;
+    };
     efi.canTouchEfiVariables = true;
   };
 
