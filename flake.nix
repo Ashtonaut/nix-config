@@ -73,5 +73,7 @@
         inherit (pre-commit-check) shellHook;
         buildInputs = pre-commit-check.enabledPackages;
       };
+
+      formatter.${system} = pkgs.nixfmt-tree;
     };
 }
