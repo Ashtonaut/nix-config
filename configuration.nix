@@ -1,5 +1,6 @@
 { 
   config, 
+  lib,
   pkgs,
   inputs, 
   ... 
@@ -11,7 +12,8 @@
     ./disko-config.nix
   ];
 
-  nixpkgs.config.allowUnfree = true; # In place for legacy, remove when possible!
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "claude-code" ];
 
   environment = {
     systemPackages = with pkgs; [
@@ -30,19 +32,6 @@
   services = {
     xserver.xkb.layout = "gb";
     upower.enable = true;
-  };
-
-  specialisation.legacy.configuration = {
-    system.nixos.tags = [ "legacy" ];
-    services = {
-      xserver.enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-    };
-    environment.systemPackages = with pkgs; [
-      vscode
-      google-chrome
-    ];
   };
 
   users.users.ashtonaut = {
