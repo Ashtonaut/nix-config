@@ -20,6 +20,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,8 +32,22 @@
       home-manager,
       disko,
       agenix,
+      git-hooks,
       ...
     }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+
+      pre-commit-check = git-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          nixfmt.enable = true;
+          deadnix.enable = true;
+          statix.enable = true;
+        };
+      };
+    in
     {
       nixosConfigurations.ashtonaut-laptop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
@@ -47,6 +65,13 @@
           disko.nixosModules.disko
           agenix.nixosModules.default
         ];
+      };
+
+      checks.${system}.pre-commit-check = pre-commit-check;
+
+      devShells.${system}.default = pkgs.mkShell {
+        inherit (pre-commit-check) shellHook;
+        buildInputs = pre-commit-check.enabledPackages;
       };
     };
 }
