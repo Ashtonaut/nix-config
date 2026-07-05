@@ -45,6 +45,7 @@
     secrets = {
       "ashtonaut.hash".file = ./secrets/ashtonaut.hash.age;
       "eduroam.env".file = ./secrets/eduroam.env.age;
+      "home-wifi.env".file = ./secrets/home-wifi.env.age;
     };
     identityPaths = [ "/etc/agenix/key.txt" ];
   };
@@ -58,7 +59,10 @@
     networkmanager = {
       enable = true;
       ensureProfiles = {
-        environmentFiles = [ config.age.secrets."eduroam.env".path ];
+        environmentFiles = [
+          config.age.secrets."eduroam.env".path
+          config.age.secrets."home-wifi.env".path
+        ];
         profiles.eduroam = {
           connection = {
             id = "eduroam";
@@ -78,6 +82,23 @@
             anonymous-identity = "anonymous@leeds.ac.uk";
             identity = "$EDUROAM_IDENTITY";
             password = "$EDUROAM_PASSWORD";
+          };
+          ipv4.method = "auto";
+          ipv6.method = "auto";
+        };
+        profiles.home-wifi = {
+          connection = {
+            id = "home-wifi";
+            type = "wifi";
+            autoconnect = true;
+          };
+          wifi = {
+            mode = "infrastructure";
+            ssid = "$HOME_WIFI_SSID";
+          };
+          wifi-security = {
+            key-mgmt = "wpa-psk";
+            psk = "$HOME_WIFI_PASSWORD";
           };
           ipv4.method = "auto";
           ipv6.method = "auto";

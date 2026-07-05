@@ -4,4 +4,5 @@ in
 {
   "secrets/ashtonaut.hash.age".publicKeys = [ host ];
   "secrets/eduroam.env.age".publicKeys = [ host ];
+  "secrets/home-wifi.env.age".publicKeys = [ host ];
 }
