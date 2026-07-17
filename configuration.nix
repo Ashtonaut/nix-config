@@ -114,6 +114,11 @@
     };
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   boot.loader = {
     systemd-boot = {
       enable = true;
