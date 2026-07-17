@@ -34,6 +34,7 @@
     tlp.enable = true;
     thermald.enable = true;
     fstrim.enable = true;
+    fwupd.enable = true;
   };
 
   security.pam.services.hyprlock = { };
