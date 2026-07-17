@@ -35,10 +35,15 @@
     thermald.enable = true;
   };
 
-  users.users.ashtonaut = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    hashedPasswordFile = config.age.secrets."ashtonaut.hash".path;
+  security.pam.services.hyprlock = { };
+
+  users = {
+    mutableUsers = false;
+    users.ashtonaut = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      hashedPasswordFile = config.age.secrets."ashtonaut.hash".path;
+    };
   };
 
   age = {
