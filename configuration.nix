@@ -35,9 +35,18 @@
     thermald.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+    };
   };
 
-  security.pam.services.hyprlock = { };
+  security = {
+    pam.services.hyprlock = { };
+    rtkit.enable = true;
+  };
 
   users = {
     mutableUsers = false;
@@ -123,6 +132,7 @@
     systemd-boot = {
       enable = true;
       configurationLimit = 10;
+      editor = false;
     };
     efi.canTouchEfiVariables = true;
   };
