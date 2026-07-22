@@ -98,6 +98,8 @@
             anonymous-identity = "anonymous@leeds.ac.uk";
             identity = "$EDUROAM_IDENTITY";
             password = "$EDUROAM_PASSWORD";
+            ca-cert = "${./certs/leeds-eduroam-ca.pem}";
+            domain-suffix-match = "radius.leeds.ac.uk";
           };
           ipv4.method = "auto";
           ipv6.method = "auto";
