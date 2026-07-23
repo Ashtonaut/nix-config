@@ -59,9 +59,9 @@
 
   age = {
     secrets = {
-      "ashtonaut.hash".file = ./secrets/ashtonaut.hash.age;
-      "eduroam.env".file = ./secrets/eduroam.env.age;
-      "home-wifi.env".file = ./secrets/home-wifi.env.age;
+      "ashtonaut.hash".file = ../secrets/ashtonaut.hash.age;
+      "eduroam.env".file = ../secrets/eduroam.env.age;
+      "home-wifi.env".file = ../secrets/home-wifi.env.age;
     };
     identityPaths = [ "/etc/agenix/key.txt" ];
   };
@@ -98,7 +98,7 @@
             anonymous-identity = "anonymous@leeds.ac.uk";
             identity = "$EDUROAM_IDENTITY";
             password = "$EDUROAM_PASSWORD";
-            ca-cert = "${./certs/leeds-eduroam-ca.pem}";
+            ca-cert = "${../certs/leeds-eduroam-ca.pem}";
             domain-suffix-match = "radius.leeds.ac.uk";
           };
           ipv4.method = "auto";
