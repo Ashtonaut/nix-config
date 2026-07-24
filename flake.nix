@@ -58,14 +58,14 @@
       nixosConfigurations.ashtonaut-laptop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./system/configuration.nix
+          ./system/default.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
-              users.ashtonaut = ./home/home.nix;
+              users.ashtonaut = ./home/default.nix;
             };
           }
           disko.nixosModules.disko
