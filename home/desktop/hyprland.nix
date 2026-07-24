@@ -82,6 +82,14 @@
               locked = true;
               repeating = true;
             } "XF86AudioRaiseVolume" ''hl.dsp.exec_cmd("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+")'')
+            (mkFlagBind {
+              locked = true;
+              repeating = true;
+            } "XF86MonBrightnessDown" ''hl.dsp.exec_cmd("brightnessctl set 5%-")'')
+            (mkFlagBind {
+              locked = true;
+              repeating = true;
+            } "XF86MonBrightnessUp" ''hl.dsp.exec_cmd("brightnessctl set 5%+")'')
           ];
 
           binds = {
