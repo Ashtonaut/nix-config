@@ -7,7 +7,7 @@
 {
   imports = [
     inputs.zen-browser.homeModules.beta
-    ./hyprland.nix
+    ./desktop
   ];
 
   home.packages = [
@@ -34,13 +34,6 @@
       };
     };
 
-    hyprlock = {
-      enable = true;
-      settings = {
-        input-field = [ { monitor = ""; } ];
-      };
-    };
-
     kitty.enable = true;
     vim.enable = true;
   };
@@ -57,22 +50,6 @@
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-    };
-  };
-
-  services.hypridle = {
-    enable = true;
-    settings = {
-      general = {
-        lock_cmd = "pidof hyprlock || hyprlock";
-        before_sleep_cmd = "loginctl lock-session";
-      };
-      listener = [
-        {
-          timeout = 300;
-          on-timeout = "loginctl lock-session";
-        }
-      ];
     };
   };
 
