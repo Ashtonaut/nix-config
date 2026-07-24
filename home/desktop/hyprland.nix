@@ -25,12 +25,14 @@
       bind =
         let
           mod = "SUPER";
-          mkBind = key: expr: {
+          mkFlagBind = flags: key: expr: {
             _args = [
               key
               (lib.generators.mkLuaInline expr)
-            ];
+            ]
+            ++ lib.optional (flags != { }) flags;
           };
+          mkBind = mkFlagBind { };
           mkFocusMove =
             {
               key,
@@ -68,6 +70,20 @@
             }
           ) wsNums;
 
+          fnBinds = [
+            (mkFlagBind {
+              locked = true;
+            } "XF86AudioMute" ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")'')
+            (mkFlagBind {
+              locked = true;
+              repeating = true;
+            } "XF86AudioLowerVolume" ''hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")'')
+            (mkFlagBind {
+              locked = true;
+              repeating = true;
+            } "XF86AudioRaiseVolume" ''hl.dsp.exec_cmd("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+")'')
+          ];
+
           binds = {
             # Launch applications
             "${mod} + Return" = ''hl.dsp.exec_cmd("kitty")'';
@@ -79,7 +95,7 @@
             "${mod} + L" = ''hl.dsp.exec_cmd("loginctl lock-session")'';
           };
         in
-        lib.mapAttrsToList mkBind binds ++ dirBinds ++ wsBinds;
+        lib.mapAttrsToList mkBind binds ++ dirBinds ++ wsBinds ++ fnBinds;
     };
   };
 }
