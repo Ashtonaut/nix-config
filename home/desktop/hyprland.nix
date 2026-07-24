@@ -30,83 +30,43 @@
         bind =
           let
             mod = "SUPER";
-            mkBind = bindEntry: {
+            mkBind = key: dsp: {
               _args = [
-                "${mod} + ${bindEntry.key}"
-                (lib.generators.mkLuaInline bindEntry.dsp)
+                key
+                (lib.generators.mkLuaInline dsp)
               ];
             };
 
-            wsKeys = builtins.genList (i: i + 1) 9;
-            wsBindEntries =
-              (map (n: {
-                key = toString n;
-                dsp = "hl.dsp.focus({ workspace = ${toString n} })";
-              }) wsKeys)
-              ++ (map (n: {
-                key = "SHIFT + ${toString n}";
-                dsp = "hl.dsp.window.move({ workspace = ${toString n}, follow = false })";
-              }) wsKeys);
+            wsNums = lib.range 1 9;
+            wsBinds = lib.concatMap (n: [
+              (mkBind "${mod} + ${toString n}" "hl.dsp.focus({ workspace = ${toString n} })")
+              (mkBind "${mod} + SHIFT + ${toString n}" "hl.dsp.window.move({ workspace = ${toString n}, follow = false })")
+            ]) wsNums;
 
-            bindEntries = [
+            binds = {
               # Launch applications
-              {
-                key = "Return";
-                dsp = ''hl.dsp.exec_cmd("kitty")'';
-              }
+              "${mod} + Return" = ''hl.dsp.exec_cmd("kitty")'';
+              "${mod} + D" = ''hl.dsp.exec_cmd("rofi -show drun")'';
 
               # Window management
-              {
-                key = "Q";
-                dsp = "hl.dsp.window.close()";
-              }
-              {
-                key = "SHIFT + Q";
-                dsp = "hl.dsp.exit()";
-              }
-              {
-                key = "L";
-                dsp = ''hl.dsp.exec_cmd("loginctl lock-session")'';
-              }
+              "${mod} + Q" = "hl.dsp.window.close()";
+              "${mod} + SHIFT + Q" = "hl.dsp.exit()";
+              "${mod} + L" = ''hl.dsp.exec_cmd("loginctl lock-session")'';
 
               # Move focus
-              {
-                key = "Left";
-                dsp = ''hl.dsp.focus({ direction = "left" })'';
-              }
-              {
-                key = "Right";
-                dsp = ''hl.dsp.focus({ direction = "right" })'';
-              }
-              {
-                key = "Up";
-                dsp = ''hl.dsp.focus({ direction = "up" })'';
-              }
-              {
-                key = "Down";
-                dsp = ''hl.dsp.focus({ direction = "down" })'';
-              }
+              "${mod} + Left" = ''hl.dsp.focus({ direction = "left" })'';
+              "${mod} + Right" = ''hl.dsp.focus({ direction = "right" })'';
+              "${mod} + Up" = ''hl.dsp.focus({ direction = "up" })'';
+              "${mod} + Down" = ''hl.dsp.focus({ direction = "down" })'';
 
               # Move windows
-              {
-                key = "SHIFT + Left";
-                dsp = ''hl.dsp.window.move({ direction = "left" })'';
-              }
-              {
-                key = "SHIFT + Right";
-                dsp = ''hl.dsp.window.move({ direction = "right" })'';
-              }
-              {
-                key = "SHIFT + Up";
-                dsp = ''hl.dsp.window.move({ direction = "up" })'';
-              }
-              {
-                key = "SHIFT + Down";
-                dsp = ''hl.dsp.window.move({ direction = "down" })'';
-              }
-            ];
+              "${mod} + SHIFT + Left" = ''hl.dsp.window.move({ direction = "left" })'';
+              "${mod} + SHIFT + Right" = ''hl.dsp.window.move({ direction = "right" })'';
+              "${mod} + SHIFT + Up" = ''hl.dsp.window.move({ direction = "up" })'';
+              "${mod} + SHIFT + Down" = ''hl.dsp.window.move({ direction = "down" })'';
+            };
           in
-          map mkBind (bindEntries ++ wsBindEntries);
+          lib.mapAttrsToList mkBind binds ++ wsBinds;
       };
     };
   };
