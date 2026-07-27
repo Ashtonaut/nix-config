@@ -8,5 +8,6 @@
     ./hyprlock.nix
     ./hypridle.nix
     ./rofi.nix
+    ./screenshot.nix
   ];
 }

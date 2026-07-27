@@ -101,6 +101,10 @@
             "${mod} + Q" = "hl.dsp.window.close()";
             "${mod} + SHIFT + Q" = "hl.dsp.exit()";
             "${mod} + L" = ''hl.dsp.exec_cmd("loginctl lock-session")'';
+
+            # Screenshots
+            "${mod} + SHIFT + XF86SelectiveScreenshot" = ''hl.dsp.exec_cmd("screenshot region")'';
+            "Print" = ''hl.dsp.exec_cmd("screenshot full")'';
           };
         in
         lib.mapAttrsToList mkBind binds ++ dirBinds ++ wsBinds ++ fnBinds;
