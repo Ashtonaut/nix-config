@@ -10,4 +10,5 @@ in
   "secrets/ashtonaut.hash.age".publicKeys = all;
   "secrets/eduroam.env.age".publicKeys = all;
   "secrets/home-wifi.env.age".publicKeys = all;
+  "secrets/accom-wifi.env.age".publicKeys = all;
 }
