@@ -106,8 +106,8 @@
             # Fn + F11 registers as BOTH:
             #   SUPER + SHIFT + XF86SelectiveScreenshot
             #   SUPER + SHIFT + S
-            "${mod} + SHIFT + XF86SelectiveScreenshot" = ''hl.dsp.exec_cmd("screenshot region")'';
-            "${mod} + SHIFT + S" = "hl.dsp.no_op()";
+            "SUPER + SHIFT + XF86SelectiveScreenshot" = ''hl.dsp.exec_cmd("screenshot region")'';
+            "SUPER + SHIFT + S" = "hl.dsp.no_op()";
             "Print" = ''hl.dsp.exec_cmd("screenshot full")'';
           };
         in
