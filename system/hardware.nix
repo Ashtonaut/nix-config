@@ -1,4 +1,6 @@
-_:
+{
+  pkgs,
+}:
 
 {
   services = {
@@ -9,9 +11,12 @@ _:
     fwupd.enable = true;
   };
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    graphics.extraPackages = [ pkgs.intel-media-driver ];
   };
 
   swapDevices = [
