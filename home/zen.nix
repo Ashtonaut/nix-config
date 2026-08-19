@@ -12,6 +12,13 @@
 
     policies = {
       DontCheckDefaultBrowser = true;
+
+      Preferences = {
+        "media.hardware-video-decoding.force-enabled" = {
+          Value = true;
+          Status = "default";
+        };
+      };
     };
   };
 }
