@@ -8,6 +8,7 @@ let
     name = "screenshot";
     runtimeInputs = [
       pkgs.grim
+      pkgs.libnotify
       pkgs.slurp
       pkgs.wl-clipboard
     ];
@@ -24,6 +25,7 @@ let
           exit 1
           ;;
       esac
+      notify-send -i "$file" "Screenshot taken" "$(basename "$file")"
     '';
   };
 in
