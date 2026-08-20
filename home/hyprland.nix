@@ -73,23 +73,23 @@
           fnBinds = [
             (mkFlagBind {
               locked = true;
-            } "XF86AudioMute" ''hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")'')
+            } "XF86AudioMute" ''hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle")'')
             (mkFlagBind {
               locked = true;
               repeating = true;
-            } "XF86AudioLowerVolume" ''hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")'')
+            } "XF86AudioLowerVolume" ''hl.dsp.exec_cmd("swayosd-client --output-volume lower")'')
             (mkFlagBind {
               locked = true;
               repeating = true;
-            } "XF86AudioRaiseVolume" ''hl.dsp.exec_cmd("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+")'')
+            } "XF86AudioRaiseVolume" ''hl.dsp.exec_cmd("swayosd-client --output-volume raise")'')
             (mkFlagBind {
               locked = true;
               repeating = true;
-            } "XF86MonBrightnessDown" ''hl.dsp.exec_cmd("brightnessctl set 5%-")'')
+            } "XF86MonBrightnessDown" ''hl.dsp.exec_cmd("swayosd-client --brightness lower")'')
             (mkFlagBind {
               locked = true;
               repeating = true;
-            } "XF86MonBrightnessUp" ''hl.dsp.exec_cmd("brightnessctl set 5%+")'')
+            } "XF86MonBrightnessUp" ''hl.dsp.exec_cmd("swayosd-client --brightness raise")'')
           ];
 
           binds = {
