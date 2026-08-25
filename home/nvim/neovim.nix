@@ -15,5 +15,8 @@
     plugins = [ pkgs.vimPlugins.render-markdown-nvim ];
   };
 
-  xdg.configFile."nvim/ftplugin/markdown.lua".source = ./ftplugin/markdown.lua;
+  xdg.configFile = {
+    "nvim/ftplugin/markdown.lua".source = ./ftplugin/markdown.lua;
+    "nvim/plugin/options.lua".source = ./plugin/options.lua;
+  };
 }
