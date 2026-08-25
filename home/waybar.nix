@@ -33,4 +33,10 @@ _:
       };
     };
   };
+
+  systemd.user.services.waybar.Service = {
+    RestartSec = "100ms";
+    RestartSteps = 4;
+    RestartMaxDelaySec = "5s";
+  };
 }
