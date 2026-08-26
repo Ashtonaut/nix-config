@@ -21,6 +21,7 @@ hl.bind(mod .. " + D", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind(mod .. " + Q", hl.dsp.window.close())
 hl.bind(mod .. " + SHIFT + Q", hl.dsp.exit())
 hl.bind(mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
+hl.bind(mod .. " + F", hl.dsp.window.fullscreen())
 
 -- Focus / move by direction
 for key, dir in pairs({ Left = "left", Right = "right", Up = "up", Down = "down" }) do
