@@ -6,11 +6,11 @@ vim.lsp.config("lua_ls", {
       workspace = {
         library = {
           vim.env.VIMRUNTIME,
-          require("nixpaths").hlStubs
-        }
-      }
-    }
-  }
+          require("nixpaths").hlStubs,
+        },
+      },
+    },
+  },
 })
 
 vim.diagnostic.config({ virtual_text = true })

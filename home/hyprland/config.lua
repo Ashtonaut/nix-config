@@ -8,7 +8,7 @@ hl.monitor({
 hl.config({
   input = {
     kb_layout = "gb",
-  }
+  },
 })
 
 local mod = "SUPER"
@@ -52,4 +52,3 @@ hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume 
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"), lrFlags)
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lower"), lrFlags)
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness raise"), lrFlags)
-
