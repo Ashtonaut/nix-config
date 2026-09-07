@@ -17,7 +17,10 @@
       pkgs.vimPlugins.render-markdown-nvim
       pkgs.vimPlugins.nvim-lspconfig
     ];
-    extraPackages = [ pkgs.lua-language-server ];
+    extraPackages = [
+      pkgs.lua-language-server
+      pkgs.astro-language-server
+    ];
   };
 
   xdg.configFile = {
@@ -25,7 +28,11 @@
     "nvim/plugin/options.lua".source = ./plugin/options.lua;
     "nvim/plugin/lsp.lua".source = ./plugin/lsp.lua;
 
-    "nvim/lua/nixpaths.lua".text =
-      ''return { hlStubs = "${osConfig.programs.hyprland.package}/share/hypr/stubs" }'';
+    "nvim/lua/nixpaths.lua".text = ''
+      return { 
+        hlStubs = "${osConfig.programs.hyprland.package}/share/hypr/stubs",
+        tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib",
+      }
+    '';
   };
 }

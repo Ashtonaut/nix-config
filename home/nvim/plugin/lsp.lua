@@ -1,4 +1,5 @@
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("astro")
 
 vim.lsp.config("lua_ls", {
   settings = {
@@ -10,6 +11,12 @@ vim.lsp.config("lua_ls", {
         },
       },
     },
+  },
+})
+
+vim.lsp.config("astro", {
+  init_options = {
+    typescript = { tsdk = require("nixpaths").tsdk },
   },
 })
 
